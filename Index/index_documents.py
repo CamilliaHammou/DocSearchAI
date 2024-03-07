@@ -1,24 +1,23 @@
 '''
-Création de l'index des documents pour le système de recherche de documents intelligents.
+Creation of the document index for the smart document retrieval system.
 
-@Auteur: Camillia
-@Temps de création: 2024-03-07 10:40:05
-@Modifié par: Camillia
-@Temps de modification: 2024-03-07 11:14:04
+@author: Camillia
+@create_time: 2024-03-07 10:40:05
+@modified_by: Camillia
+@modified_time: 2024-03-07 11:20:04
 '''
 
 from whoosh.index import create_in
-from whoosh.fields import Schema, TEXT, ID
+from whoosh.fields import Schema, TEXT
 import os
 import textract
 
-
 def create_index(docs_folder, index_folder):
     """
-    Fonction pour créer l'index des documents.
+    Function to create the document index.
 
-    :param docs_folder: Le chemin du dossier contenant les documents.
-    :param index_folder: Le chemin du dossier où l'index sera stocké.
+    :param docs_folder: The path of the folder containing the documents.
+    :param index_folder: The path of the folder where the index will be stored.
     """
     schema = Schema(title=TEXT(stored=True), content=TEXT())
 
@@ -35,7 +34,7 @@ def create_index(docs_folder, index_folder):
                 text = textract.process(file_path).decode('utf-8')
                 writer.add_document(title=file, content=text)
             except Exception as e:
-                print(f"Erreur lors du traitement du document {file}: {e}")
+                print(f"Error processing document {file}: {e}")
 
     writer.commit()
 
