@@ -14,7 +14,12 @@ import textract
 
 
 def create_index(docs_folder, index_folder):
-    
+    """
+    Fonction pour créer l'index des documents.
+
+    :param docs_folder: Le chemin du dossier contenant les documents.
+    :param index_folder: Le chemin du dossier où l'index sera stocké.
+    """
     schema = Schema(title=TEXT(stored=True), content=TEXT())
 
     if not os.path.exists(index_folder):
@@ -34,8 +39,7 @@ def create_index(docs_folder, index_folder):
 
     writer.commit()
 
-docs_folder = "Document"
-
+docs_folder = "../Document"
 index_folder = "Index"
 
 create_index(docs_folder, index_folder)
